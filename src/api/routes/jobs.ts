@@ -82,7 +82,7 @@ export function createJobRouter(
       res.json({
         jobId: job.id,
         status: job.status,
-        result: job.output!.data,
+        result: job.output?.data ?? null,
         completedAt: job.completedAt,
       });
     })
