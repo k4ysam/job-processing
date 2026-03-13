@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd \"C:\\\\Users\\\\Samaksh\\\\Documents\\\\test\\\\magicalprac\" && npm install 2>&1 | tail -5)",
+      "Bash(cd \"C:\\\\Users\\\\Samaksh\\\\Documents\\\\test\\\\magicalprac\" && npx tsc --noEmit 2>&1)"
+    ]
+  }
+}
