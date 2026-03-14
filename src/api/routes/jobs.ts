@@ -26,6 +26,7 @@ function describeJobStatus(status: JobStatus): StatusMeta {
     running:   { label: 'Processing',  terminal: false, actionable: false },
     completed: { label: 'Completed',   terminal: true,  actionable: false },
     failed:    { label: 'Failed',      terminal: true,  actionable: true  },
+    cancelled: { label: 'Cancelled',   terminal: true,  actionable: false },
   };
 
   const meta = lookup[status];
