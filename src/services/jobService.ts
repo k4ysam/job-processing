@@ -34,7 +34,7 @@ export class JobService {
       updatedAt: new Date(),
     };
 
-    this.db.insertJob(job);
+    await this.db.insertJob(job);
     logger.info(`Job created: ${job.id} type=${job.type} priority=${job.priority}`);
     return job;
   }
