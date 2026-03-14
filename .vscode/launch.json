@@ -24,6 +24,16 @@
         "env": { "TS_NODE_PROJECT": "${workspaceFolder}/tsconfig.json" },
         "console": "integratedTerminal",
         "internalConsoleOptions": "neverOpen"
-      }
+      },
+      {
+  "type": "node",
+  "request": "launch",
+  "name": "Debug: Script",
+  "runtimeArgs": ["-r", "ts-node/register"],
+  "args": ["${workspaceFolder}/src/scripts/repro7.ts"],
+  "cwd": "${workspaceFolder}",
+  "console": "integratedTerminal",
+  "env": { "TS_NODE_PROJECT": "${workspaceFolder}/tsconfig.json" }
+}
     ]
   }

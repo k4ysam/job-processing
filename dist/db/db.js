@@ -12,6 +12,7 @@ class InMemoryDatabase {
     }
     async insertJob(job) {
         await this.tick();
+        await new Promise(resolve => setTimeout(resolve, 1000));
         this.jobs.set(job.id, { ...job });
     }
     async findJobById(id) {

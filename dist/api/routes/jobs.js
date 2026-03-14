@@ -51,7 +51,7 @@ function createJobRouter(jobService, notificationService, processor) {
         res.json({
             jobId: job.id,
             status: job.status,
-            result: job.output.data,
+            result: job.output?.data ?? null,
             completedAt: job.completedAt,
         });
     }));
