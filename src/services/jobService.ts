@@ -70,7 +70,7 @@ export class JobService {
   ): Promise<PaginatedResult<Job>> {
     const all = await this.db.findAllJobs();
     const total = all.length;
-    const offset = page * limit;
+    const offset = (page - 1) * limit;
 
     return {
       data: all.slice(offset, offset + limit),
