@@ -17,6 +17,7 @@ export class RetryService {
       await this.execute(job);
     } catch (err) {
       logger.error(`RetryService: job ${job.id} encountered an error`, err);
+      throw err;
     }
   }
 

@@ -30,7 +30,7 @@
   "request": "launch",
   "name": "Debug: Script",
   "runtimeArgs": ["-r", "ts-node/register"],
-  "args": ["${workspaceFolder}/src/scripts/repro7.ts"],
+  "args": ["${workspaceFolder}/repro-get-job-cancelled.ts"],
   "cwd": "${workspaceFolder}",
   "console": "integratedTerminal",
   "env": { "TS_NODE_PROJECT": "${workspaceFolder}/tsconfig.json" }
