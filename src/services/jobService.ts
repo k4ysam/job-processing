@@ -59,6 +59,7 @@ export class JobService {
     extra: Partial<Job> = {}
   ): Promise<Job> {
     const updated = await this.db.updateJob(id, { status, ...extra });
+    this.cache.delete(id); // fix issue 6 
     if (!updated) throw new NotFoundError(id);
     logger.info(`Job ${id} status → ${status}`);
     return updated;

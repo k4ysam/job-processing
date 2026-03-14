@@ -23,7 +23,7 @@ class JobService {
             createdAt: new Date(),
             updatedAt: new Date(),
         };
-        this.db.insertJob(job);
+        await this.db.insertJob(job);
         logger_1.logger.info(`Job created: ${job.id} type=${job.type} priority=${job.priority}`);
         return job;
     }
@@ -41,6 +41,7 @@ class JobService {
     }
     async updateJobStatus(id, status, extra = {}) {
         const updated = await this.db.updateJob(id, { status, ...extra });
+        this.cache.delete(id); // fix issue 6 
         if (!updated)
             throw new types_1.NotFoundError(id);
         logger_1.logger.info(`Job ${id} status → ${status}`);
@@ -49,7 +50,7 @@ class JobService {
     async listJobs(page, limit) {
         const all = await this.db.findAllJobs();
         const total = all.length;
-        const offset = page * limit;
+        const offset = (page - 1) * limit;
         return {
             data: all.slice(offset, offset + limit),
             total,

@@ -16,7 +16,7 @@ function sleep(ms) {
 async function withRetry(fn, opts) {
     const { maxRetries, delayMs, backoffFactor } = opts;
     let lastErr = new Error('No attempts made');
-    for (let attempt = 0; attempt < maxRetries; attempt++) {
+    for (let attempt = 0; attempt <= maxRetries; attempt++) {
         try {
             return await fn();
         }

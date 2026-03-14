@@ -41,7 +41,24 @@ class NotificationService {
     async notifyJobEvent(payload) {
         const channels = await this.db.findAllChannels();
         const active = channels.filter(c => c.active);
-        await Promise.all(active.map(ch => this.sendToChannel(ch, payload)));
+        if (active.length === 0) {
+            logger_1.logger.warn('No active notification channels configured');
+            return [];
+        }
+        const settled = await Promise.allSettled(active.map(ch => this.sendToChannel(ch, payload)));
+        const results = settled.map((outcome, i) => {
+            if (outcome.status === 'fulfilled') {
+                return outcome.value;
+            }
+            const ch = active[i];
+            logger_1.logger.error(`Channel ${ch.id} failed`, outcome.reason);
+            return { channelId: ch.id, success: false, error: String(outcome.reason) };
+        });
+        const failed = results.filter(r => !r.success);
+        if (failed.length > 0) {
+            logger_1.logger.warn(`${failed.length} of ${results.length} channels failed`);
+        }
+        return results;
     }
 }
 exports.NotificationService = NotificationService;

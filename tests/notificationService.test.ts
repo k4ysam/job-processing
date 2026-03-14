@@ -71,7 +71,12 @@ describe('NotificationService', () => {
     await addChannel(db, { endpoint: 'http://localhost:9001/bad' });
 
     const results = await service.notifyJobEvent(makePayload());
-    expect(results).toBeUndefined();
+    const successes = results.filter(r => r.success);
+    const failures = results.filter(r => !r.success);
+    expect(results).toHaveLength(2);
+    expect(successes).toHaveLength(1);
+    expect(failures).toHaveLength(1);
+    expect(failures[0].error).toContain('connection refused');
   });
 
   it('reports partial failures without throwing', async () => {

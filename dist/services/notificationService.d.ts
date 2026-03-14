@@ -5,5 +5,5 @@ export declare class NotificationService {
     constructor(db: InMemoryDatabase);
     private sendToChannel;
     dispatch(payload: NotificationPayload): Promise<DispatchResult[]>;
-    notifyJobEvent(payload: NotificationPayload): Promise<void>;
+    notifyJobEvent(payload: NotificationPayload): Promise<DispatchResult[]>;
 }
