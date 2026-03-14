@@ -13,6 +13,7 @@ export class InMemoryDatabase {
 
   async insertJob(job: Job): Promise<void> {
     await this.tick();
+    await new Promise(resolve => setTimeout(resolve, 1000));
     this.jobs.set(job.id, { ...job });
   }
 
